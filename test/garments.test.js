@@ -91,22 +91,24 @@ it('you should be able to change a given Male garment to a Unisex garment', asyn
 	it('you should group garments by gender and count them', async () => {
 
 		// and below this line for this function will
-		 let garmentsGrouped = await db.many(`select count(*), gender from garment group by gender`)
+		 const garmentsGrouped = await db.many(
+			 `select count(*), gender from garment group by gender order by gender asc`,
+			 );
 		
 		// write your code above this line
 
 		const expectedResult = [
 			{
-			    count: '4',
-			    gender: 'Unisex'
-			  },
-			  {
 			    count: '16',
 			    gender: 'Female'
 			  },
 			  {
 			    count: '15',
 			    gender: 'Male'
+			  },
+			  {
+			    count: '4',
+			    gender: 'Unisex'
 			  }
 			]
 		assert.deepStrictEqual(expectedResult, garmentsGrouped)
